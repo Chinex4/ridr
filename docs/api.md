@@ -31,10 +31,40 @@ Base path: `/api/v1`
 - `POST /driver/rides/{ride}/start` (auth:api, role:driver, kyc.approved)
 - `POST /driver/rides/{ride}/complete` (auth:api, role:driver, kyc.approved)
 
+KYC required document types:
+- `government_id`
+- `driver_license`
+- `selfie`
+- `proof_of_address`
+- `vehicle_registration`
+- `insurance`
+- `roadworthiness`
+- `vehicle_photo_exterior`
+- `vehicle_photo_interior`
+
 ### Admin
 - `GET /admin/drivers?kyc_status=pending` (auth:api, role:admin)
+- `GET /admin/drivers/{driver}` (auth:api, role:admin)
+- `PATCH /admin/drivers/{driver}` (auth:api, role:admin)
 - `POST /admin/drivers/{driver}/approve` (auth:api, role:admin)
 - `POST /admin/drivers/{driver}/reject` (auth:api, role:admin)
+- `GET /admin/users` (auth:api, role:admin)
+- `POST /admin/users` (auth:api, role:admin)
+- `GET /admin/users/{user}` (auth:api, role:admin)
+- `PATCH /admin/users/{user}` (auth:api, role:admin)
+- `DELETE /admin/users/{user}` (auth:api, role:admin)
+- `GET /admin/rides` (auth:api, role:admin)
+- `GET /admin/rides/{ride}` (auth:api, role:admin)
+- `PATCH /admin/rides/{ride}` (auth:api, role:admin)
+- `DELETE /admin/rides/{ride}` (auth:api, role:admin)
+- `GET /admin/payments` (auth:api, role:admin)
+- `GET /admin/payments/{payment}` (auth:api, role:admin)
+- `PATCH /admin/payments/{payment}` (auth:api, role:admin)
+- `DELETE /admin/payments/{payment}` (auth:api, role:admin)
+- `GET /admin/driver-documents` (auth:api, role:admin)
+- `GET /admin/driver-documents/{driverDocument}` (auth:api, role:admin)
+- `PATCH /admin/driver-documents/{driverDocument}` (auth:api, role:admin)
+- `DELETE /admin/driver-documents/{driverDocument}` (auth:api, role:admin)
 
 ### Webhooks
 - `POST /webhooks/paystack`

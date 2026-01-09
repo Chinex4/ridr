@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\DriverDocumentStatus;
+use App\Enums\DriverDocumentType;
 use App\Enums\KycStatus;
 use App\Models\Driver;
 use App\Models\DriverDocument;
@@ -30,12 +31,18 @@ class KycService
             ]);
 
             foreach ($data['documents'] as $document) {
-                DriverDocument::create([
-                    'driver_id' => $driver->id,
-                    'type' => $document['type'],
-                    'file_path' => $document['file_path'],
-                    'status' => DriverDocumentStatus::Pending,
-                ]);
+                DriverDocument::updateOrCreate(
+                    [
+                        'driver_id' => $driver->id,
+                        'type' => DriverDocumentType::from($document['type']),
+                    ],
+                    [
+                        'file_path' => $document['file_path'],
+                        'status' => DriverDocumentStatus::Pending,
+                        'reviewed_at' => null,
+                        'rejection_reason' => null,
+                    ]
+                );
             }
 
             return $driver->fresh('documents');

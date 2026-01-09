@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Enums\KycStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminDriverReviewRequest;
+use App\Http\Requests\AdminDriverUpdateRequest;
 use App\Models\Driver;
 use App\Services\KycService;
 use Illuminate\Http\Request;
@@ -47,5 +48,23 @@ class AdminDriverController extends Controller
         $driver = $kycService->review($driver, false, $request->validated('reason'));
 
         return response()->json(['driver' => $driver]);
+    }
+
+    /**
+     * @group Admin
+     */
+    public function show(Driver $driver)
+    {
+        return response()->json(['driver' => $driver->load(['user', 'documents'])]);
+    }
+
+    /**
+     * @group Admin
+     */
+    public function update(AdminDriverUpdateRequest $request, Driver $driver)
+    {
+        $driver->update($request->validated());
+
+        return response()->json(['driver' => $driver->fresh('documents')]);
     }
 }

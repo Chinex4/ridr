@@ -7,6 +7,10 @@ use App\Http\Controllers\Api\V1\FareController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\RideController;
 use App\Http\Controllers\Api\V1\AdminDriverController;
+use App\Http\Controllers\Api\V1\AdminDriverDocumentController;
+use App\Http\Controllers\Api\V1\AdminPaymentController;
+use App\Http\Controllers\Api\V1\AdminRideController;
+use App\Http\Controllers\Api\V1\AdminUserController;
 use App\Http\Controllers\Api\V1\WebhookController;
 use App\Http\Controllers\Api\V1\OtpController;
 use App\Http\Controllers\Api\V1\PasswordController;
@@ -54,8 +58,31 @@ Route::prefix('v1')->group(function () {
         Route::get('/payments/{reference}', [PaymentController::class, 'show']);
 
         Route::get('/admin/drivers', [AdminDriverController::class, 'index'])->middleware('role:admin');
+        Route::get('/admin/drivers/{driver}', [AdminDriverController::class, 'show'])->middleware('role:admin');
+        Route::patch('/admin/drivers/{driver}', [AdminDriverController::class, 'update'])->middleware('role:admin');
         Route::post('/admin/drivers/{driver}/approve', [AdminDriverController::class, 'approve'])->middleware('role:admin');
         Route::post('/admin/drivers/{driver}/reject', [AdminDriverController::class, 'reject'])->middleware('role:admin');
+
+        Route::get('/admin/users', [AdminUserController::class, 'index'])->middleware('role:admin');
+        Route::post('/admin/users', [AdminUserController::class, 'store'])->middleware('role:admin');
+        Route::get('/admin/users/{user}', [AdminUserController::class, 'show'])->middleware('role:admin');
+        Route::patch('/admin/users/{user}', [AdminUserController::class, 'update'])->middleware('role:admin');
+        Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->middleware('role:admin');
+
+        Route::get('/admin/rides', [AdminRideController::class, 'index'])->middleware('role:admin');
+        Route::get('/admin/rides/{ride}', [AdminRideController::class, 'show'])->middleware('role:admin');
+        Route::patch('/admin/rides/{ride}', [AdminRideController::class, 'update'])->middleware('role:admin');
+        Route::delete('/admin/rides/{ride}', [AdminRideController::class, 'destroy'])->middleware('role:admin');
+
+        Route::get('/admin/payments', [AdminPaymentController::class, 'index'])->middleware('role:admin');
+        Route::get('/admin/payments/{payment}', [AdminPaymentController::class, 'show'])->middleware('role:admin');
+        Route::patch('/admin/payments/{payment}', [AdminPaymentController::class, 'update'])->middleware('role:admin');
+        Route::delete('/admin/payments/{payment}', [AdminPaymentController::class, 'destroy'])->middleware('role:admin');
+
+        Route::get('/admin/driver-documents', [AdminDriverDocumentController::class, 'index'])->middleware('role:admin');
+        Route::get('/admin/driver-documents/{driverDocument}', [AdminDriverDocumentController::class, 'show'])->middleware('role:admin');
+        Route::patch('/admin/driver-documents/{driverDocument}', [AdminDriverDocumentController::class, 'update'])->middleware('role:admin');
+        Route::delete('/admin/driver-documents/{driverDocument}', [AdminDriverDocumentController::class, 'destroy'])->middleware('role:admin');
     });
 
     Route::post('/webhooks/paystack', [WebhookController::class, 'paystack']);

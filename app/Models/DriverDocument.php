@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DriverDocumentStatus;
+use App\Enums\DriverDocumentType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ class DriverDocument extends Model
     ];
 
     protected $casts = [
+        'type' => DriverDocumentType::class,
         'status' => DriverDocumentStatus::class,
         'reviewed_at' => 'datetime',
     ];

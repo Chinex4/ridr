@@ -111,7 +111,7 @@ endpoints:
         name: purpose
         description: ''
         required: false
-        example: password_reset
+        example: email_verification
         type: string
         enumValues:
           - email_verification
@@ -121,7 +121,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       email: gbailey@example.net
-      purpose: password_reset
+      purpose: email_verification
     fileParameters: []
     responses: []
     responseFields: []

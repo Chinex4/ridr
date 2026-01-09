@@ -42,7 +42,7 @@ endpoints:
         name: license_expiry
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-09T14:14:58'
+        example: '2026-01-09T14:47:56'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -83,7 +83,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       license_number: b
-      license_expiry: '2026-01-09T14:14:58'
+      license_expiry: '2026-01-09T14:47:56'
       vehicle_make: 'n'
       vehicle_model: g
       vehicle_plate: z
@@ -173,7 +173,7 @@ endpoints:
         name: license_expiry
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-09T14:14:58'
+        example: '2026-01-09T14:47:56'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -227,11 +227,20 @@ endpoints:
       'documents[].type':
         custom: []
         name: 'documents[].type'
-        description: 'Must not be greater than 50 characters.'
+        description: ''
         required: true
-        example: b
+        example: vehicle_photo_interior
         type: string
-        enumValues: []
+        enumValues:
+          - government_id
+          - driver_license
+          - selfie
+          - proof_of_address
+          - vehicle_registration
+          - insurance
+          - roadworthiness
+          - vehicle_photo_exterior
+          - vehicle_photo_interior
         exampleWasSpecified: false
         nullable: false
         deprecated: false
@@ -240,7 +249,7 @@ endpoints:
         name: 'documents[].file_path'
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: 'n'
+        example: b
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -248,14 +257,14 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       license_number: b
-      license_expiry: '2026-01-09T14:14:58'
+      license_expiry: '2026-01-09T14:47:56'
       vehicle_make: 'n'
       vehicle_model: g
       vehicle_plate: z
       documents:
         -
-          type: b
-          file_path: 'n'
+          type: vehicle_photo_interior
+          file_path: b
     fileParameters: []
     responses: []
     responseFields: []

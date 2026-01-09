@@ -43,14 +43,14 @@ endpoints:
         name: use_saved_authorization
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      use_saved_authorization: false
+      use_saved_authorization: true
     fileParameters: []
     responses: []
     responseFields: []
