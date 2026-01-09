@@ -1,0 +1,146 @@
+{
+  "info": {
+    "name": "Ride API v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Jane\",\"email\":\"jane@example.com\",\"phone\":\"+234000000000\",\"password\":\"password\",\"password_confirmation\":\"password\"}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"jane@example.com\",\"password\":\"password\"}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rides",
+      "item": [
+        {
+          "name": "Create Ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/rides",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "rides"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"pickup_lat\":6.5244,\"pickup_lng\":3.3792,\"pickup_address\":\"Pickup\",\"dropoff_lat\":6.4654,\"dropoff_lng\":3.4064,\"dropoff_address\":\"Dropoff\"}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List Rides",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/rides",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "rides"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Driver",
+      "item": [
+        {
+          "name": "Apply Driver",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/driver/apply",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "driver", "apply"]
+            }
+          }
+        },
+        {
+          "name": "Available Rides",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/driver/rides/available?lat=6.5&lng=3.3&radius_km=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "driver", "rides", "available"],
+              "query": [
+                { "key": "lat", "value": "6.5" },
+                { "key": "lng", "value": "3.3" },
+                { "key": "radius_km", "value": "5" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Init Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/rides/{{rideId}}/pay/init",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "rides", "{{rideId}}", "pay", "init"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" },
+    { "key": "token", "value": "" },
+    { "key": "rideId", "value": "" }
+  ]
+}
